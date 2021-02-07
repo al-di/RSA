@@ -1,3 +1,5 @@
+import random
+
 alph = {" ":"00",
         "A":"01",
         "B":"02",
@@ -234,9 +236,40 @@ def decryptPot(geheimnumbers, d, m, blocklength):
 
 
 
+
+def eea(a, b):
+    if(b==0):
+        return (a, 1, 0)
+    
+    (d, sSt, tSt)=eea(b, a%b)
+
+    s = tSt
+    t = sSt-(int(a/b))*tSt
+
+    return (d, s, t)
+
+
+
+
 #####################
 
 
+
+def schluesselErzeugung(p, q):
+    """
+    >>> schluesselErzeugung(7, 11)
+    (13, 77, 37)
+    """
+    n=p*q
+    phieVonN=(p-1)*(q-1)
+
+    e=13#random.randint(1,(phieVonN-1))
+
+    (d, s, t)=eea(e, phieVonN)
+
+    return (e, n, d)
+
+    
 
 
 
