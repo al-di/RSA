@@ -11,3 +11,5 @@ def eea(a, b):
 
 
 print(eea(13,60))
+print(eea(41,192))
+
