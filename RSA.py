@@ -238,15 +238,15 @@ def decryptPot(geheimnumbers, d, m, blocklength):
 
 
 def eea(a, b):
-    if(b==0):
-        return (a, 1, 0)
+    if(b==0):#Abbruch der Rekursion
+        return (a, 1, 0)# a=ggt; 1=1*a-0*b
     
-    (d, sSt, tSt)=eea(b, a%b)
+    (ggt, sSt, tSt)=eea(b, a%b)# 1=s*a-t*b(sSt und tSt Werte aus dem aufruf von eea(b, a%b)
 
     s = tSt
-    t = sSt-(int(a/b))*tSt
+    t = sSt-(int(a/b))*tSt#1=s*a-t*b
 
-    return (d, s, t)
+    return (ggt, s, t)
 
 
 
@@ -265,9 +265,12 @@ def schluesselErzeugung(p, q):
 
     e=13#random.randint(1,(phieVonN-1))
 
-    (d, s, t)=eea(e, phieVonN)
+    (ggt, decrypt, t)=eea(e, phieVonN)
 
-    return (e, n, d)
+    if(decrypt<0):
+        decrypt=decrypt+phieVonN
+    
+    return (e, n, decrypt)
 
     
 
